@@ -38,11 +38,25 @@ const scoreNumber2 = document.querySelector(".score2");
 
 const nextBtn = document.querySelector(".next-btn");
 
-let score1 = 0;
-let score2 = 0;
+let score1;
+let score2 ;
 console.log(scoreNumber1.innerHTML,'score1',scoreNumber2.innerHTML,'score2');
 //Local Storage
+if(localStorage.getItem('score1')){
+  score1= JSON.parse(localStorage.getItem('score1'));
+  scoreNumber1.innerText = JSON.parse(localStorage.getItem('score1'));
+}else{
+  score1=0;
+  localStorage.setItem('score1',0);
+}
 
+if(localStorage.getItem('score2')){
+  score2= JSON.parse(localStorage.getItem('score2'));
+  scoreNumber2.innerText = JSON.parse(localStorage.getItem('score2'));
+}else{
+  score2=0;
+  localStorage.setItem('score2',0);
+}
 
 
 choiceButtons.forEach((button) => {
@@ -119,12 +133,14 @@ function isWinner(results) {
 
 function keepScore1(point1) {
   score2 += point1;
-  scoreNumber2.innerText = score2;
+  localStorage.setItem('score2',JSON.stringify(score2));
+  scoreNumber2.innerText = JSON.parse(localStorage.getItem('score2'));
 }
 
 function keepScore2(point2) {
   score1 += point2;
-  scoreNumber1.innerText = score1;
+  localStorage.setItem('score1',JSON.stringify(score1));
+  scoreNumber1.innerText =JSON.parse(localStorage.getItem('score1'));
 }
 
 // Play Again
